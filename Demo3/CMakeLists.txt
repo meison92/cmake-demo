@@ -12,7 +12,9 @@ aux_source_directory(. DIR_SRCS)
 add_subdirectory(math)
 
 # 指定生成目标
-add_executable(Demo ${DIR_SRCS})
+add_executable(Demo3 ${DIR_SRCS})
 
 # 添加链接库
-target_link_libraries(Demo MathFunctions)
+target_link_libraries(Demo3 MathFunctions3)
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

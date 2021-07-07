@@ -20,7 +20,7 @@ configure_file (
 if (NOT HAVE_POW)
   include_directories ("${PROJECT_SOURCE_DIR}/math")
   add_subdirectory (math)
-  set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions)
+  set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions6)
 endif (NOT HAVE_POW)
 
 # 查找当前目录下的所有源文件
@@ -28,8 +28,8 @@ endif (NOT HAVE_POW)
 aux_source_directory(. DIR_SRCS)
 
 # 指定生成目标
-add_executable(Demo ${DIR_SRCS})
-target_link_libraries (Demo  ${EXTRA_LIBS})
+add_executable(Demo6 ${DIR_SRCS})
+target_link_libraries (Demo6  ${EXTRA_LIBS})
 
 # 指定安装路径
 install (TARGETS Demo DESTINATION bin)
@@ -40,16 +40,16 @@ install (FILES "${PROJECT_BINARY_DIR}/config.h"
 enable_testing()
 
 # 测试程序是否成功运行
-add_test (test_run Demo 5 2)
+add_test (test_run Demo6 5 2)
 
 # 测试帮助信息是否可以正常提示
-add_test (test_usage Demo)
+add_test (test_usage Demo6)
 set_tests_properties (test_usage
   PROPERTIES PASS_REGULAR_EXPRESSION "Usage: .* base exponent")
 
 # 定义一个宏，用来简化测试工作
 macro (do_test arg1 arg2 result)
-  add_test (test_${arg1}_${arg2} Demo ${arg1} ${arg2})
+  add_test (test_${arg1}_${arg2} Demo6 ${arg1} ${arg2})
   set_tests_properties (test_${arg1}_${arg2}
     PROPERTIES PASS_REGULAR_EXPRESSION ${result})
 endmacro (do_test)
@@ -58,3 +58,5 @@ endmacro (do_test)
 do_test (5 2 "is 25")
 do_test (10 5 "is 100000")
 do_test (2 10 "is 1024")
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

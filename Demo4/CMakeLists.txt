@@ -20,7 +20,7 @@ configure_file (
 if (USE_MYMATH)
   include_directories ("${PROJECT_SOURCE_DIR}/math")
   add_subdirectory (math)
-  set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions)
+  set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions4)
 endif (USE_MYMATH)
 
 # 查找当前目录下的所有源文件
@@ -28,5 +28,7 @@ endif (USE_MYMATH)
 aux_source_directory(. DIR_SRCS)
 
 # 指定生成目标
-add_executable (Demo ${DIR_SRCS})
-target_link_libraries (Demo  ${EXTRA_LIBS})
+add_executable (Demo4 ${DIR_SRCS})
+target_link_libraries (Demo4  ${EXTRA_LIBS})
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
