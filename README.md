@@ -27,8 +27,7 @@
     - [<font color='red'> CMakeLists.txt 自动推导 </font>](#font-colorred-cmakeliststxt-自动推导-font)
 - [<font color='green' size=5> 相关链接 </font>](#font-colorgreen-size5-相关链接-font)
 - [<font color='green' size=5> 类似工具 </font>](#font-colorgreen-size5-类似工具-font)
-- [SCons：Eric S. Raymond、Timothee Besset、Zed A. Shaw 等大神力荐的项目架构工具。和 CMake 的最大区别是使用 Python 作为执行脚本。](#sconseric-s-raymondtimothee-bessetzed-a-shaw-等大神力荐的项目架构工具和-cmake-的最大区别是使用-python-作为执行脚本)
-=====
+
 
 [CMake 入门实战](https://hahack.com/codes/cmake) 的源代码。
 
@@ -811,9 +810,8 @@ CMake 可以很轻松地构建出在适合各个平台执行的工程环境。�
 
 &emsp;[视频教程: 《Getting Started with CMake》](http://www.youtube.com/watch?v=CLvZTyji_Uw)
 
-
 # <font color='green' size=5> 类似工具 </font>
 
 [SCons](http://scons.org/)：Eric S. Raymond、Timothee Besset、Zed A. Shaw 等大神力荐的项目架构工具。和 CMake 的最大区别是使用 Python 作为执行脚本。
-==
+
 [这个页面](http://www.cmake.org/Wiki/CMake_Projects)详细罗列了使用 CMake 的知名项目 ↩︎
