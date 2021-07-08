@@ -1,27 +1,42 @@
-<!-- vscode-markdown-toc -->
-	* 1. [<font color='red'> 编写 CMakeLists.txt </font>](#fontcolorredCMakeLists.txtfont)
-	* 2. [<font color='red'> 编译项目 </font>](#fontcolorredfont)
-* 1. [<font color='Chocolate' size=3> *同一目录，多个源文件* </font>](#fontcolorChocolatesize3font)
-* 2. [<font color='Chocolate' size=3> *多个目录，多个源文件* </font>](#fontcolorChocolatesize3font-1)
-	* 2.1. [<font color='red'> 修改 CMakeLists 文件 </font>](#fontcolorredCMakeListsfont)
-	* 2.2. [<font color='red'> 修改 main.cc 文件 </font>](#fontcolorredmain.ccfont)
-	* 2.3. [<font color='red'> 编写 config.h.in 文件 </font>](#fontcolorredconfig.h.infont)
-	* 2.4. [<font color='red'> 编译项目 </font>](#fontcolorredfont-1)
-* 3. [<font color='Chocolate' size=3> *定制安装规则* </font>](#fontcolorChocolatesize3font-1)
-* 4. [<font color='Chocolate' size=3> *为工程添加测试* </font>](#fontcolorChocolatesize3font-1)
-	* 4.1. [<font color='red'> 添加 CheckFunctionExists 宏 </font>](#fontcolorredCheckFunctionExistsfont)
-	* 4.2. [<font color='red'> 预定义相关宏变量 </font>](#fontcolorredfont-1)
-	* 4.3. [<font color='red'> 在代码中使用宏和函数 </font>](#fontcolorredfont-1)
-	* 4.4. [<font color='red'> autotools </font>](#fontcolorredautotoolsfont)
-	* 4.5. [<font color='red'> qmake </font>](#fontcolorredqmakefont)
-	* 4.6. [<font color='red'> Visual Studio </font>](#fontcolorredVisualStudiofont)
-	* 4.7. [<font color='red'> CMakeLists.txt 自动推导 </font>](#fontcolorredCMakeLists.txtfont-1)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->CMake-Demo
+- [CMake-Demo](#cmake-demo)
+- [<font color='green' size=5> 什么是 CMake </font>](#font-colorgreen-size5-%E4%BB%80%E4%B9%88%E6%98%AF-cmake-font)
+- [<font color='green' size=5> 入门案例：单个源文件 </font>](#font-colorgreen-size5-%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B%E5%8D%95%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6-font)
+    - [<font color='red'> 编写 CMakeLists.txt </font>](#font-colorred-%E7%BC%96%E5%86%99-cmakeliststxt-font)
+    - [<font color='red'> 编译项目 </font>](#font-colorred-%E7%BC%96%E8%AF%91%E9%A1%B9%E7%9B%AE-font)
+- [<font color='green' size=5> 多个源文件 </font>](#font-colorgreen-size5-%E5%A4%9A%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6-font)
+  - [<font color='Chocolate' size=3> *同一目录，多个源文件* </font>](#font-colorchocolate-size3-%E5%90%8C%E4%B8%80%E7%9B%AE%E5%BD%95%E5%A4%9A%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6-font)
+  - [<font color='Chocolate' size=3> *多个目录，多个源文件* </font>](#font-colorchocolate-size3-%E5%A4%9A%E4%B8%AA%E7%9B%AE%E5%BD%95%E5%A4%9A%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6-font)
+- [<font color='green' size=5> 自定义编译选项 </font>](#font-colorgreen-size5-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9-font)
+    - [<font color='red'> 修改 CMakeLists 文件 </font>](#font-colorred-%E4%BF%AE%E6%94%B9-cmakelists-%E6%96%87%E4%BB%B6-font)
+    - [<font color='red'> 修改 main.cc 文件 </font>](#font-colorred-%E4%BF%AE%E6%94%B9-maincc-%E6%96%87%E4%BB%B6-font)
+    - [<font color='red'> 编写 config.h.in 文件 </font>](#font-colorred-%E7%BC%96%E5%86%99-confighin-%E6%96%87%E4%BB%B6-font)
+    - [<font color='red'> 编译项目 </font>](#font-colorred-%E7%BC%96%E8%AF%91%E9%A1%B9%E7%9B%AE-font-1)
+- [<font color='green' size=5> 安装和测试 </font>](#font-colorgreen-size5-%E5%AE%89%E8%A3%85%E5%92%8C%E6%B5%8B%E8%AF%95-font)
+  - [<font color='Chocolate' size=3> *定制安装规则* </font>](#font-colorchocolate-size3-%E5%AE%9A%E5%88%B6%E5%AE%89%E8%A3%85%E8%A7%84%E5%88%99-font)
+  - [<font color='Chocolate' size=3> *为工程添加测试* </font>](#font-colorchocolate-size3-%E4%B8%BA%E5%B7%A5%E7%A8%8B%E6%B7%BB%E5%8A%A0%E6%B5%8B%E8%AF%95-font)
+- [<font color='green' size=5> 支持 gdb </font>](#font-colorgreen-size5-%E6%94%AF%E6%8C%81-gdb-font)
+- [<font color='green' size=5> 添加环境检查 </font>](#font-colorgreen-size5-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E6%A3%80%E6%9F%A5-font)
+    - [<font color='red'> 添加 CheckFunctionExists 宏 </font>](#font-colorred-%E6%B7%BB%E5%8A%A0-checkfunctionexists-%E5%AE%8F-font)
+    - [<font color='red'> 预定义相关宏变量 </font>](#font-colorred-%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9B%B8%E5%85%B3%E5%AE%8F%E5%8F%98%E9%87%8F-font)
+    - [<font color='red'> 在代码中使用宏和函数 </font>](#font-colorred-%E5%9C%A8%E4%BB%A3%E7%A0%81%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%AE%8F%E5%92%8C%E5%87%BD%E6%95%B0-font)
+- [<font color='green' size=5> 添加版本号 </font>](#font-colorgreen-size5-%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E5%8F%B7-font)
+- [<font color='green' size=5> 生成安装包 </font>](#font-colorgreen-size5-%E7%94%9F%E6%88%90%E5%AE%89%E8%A3%85%E5%8C%85-font)
+- [<font color='green' size=5> 将其他平台的项目迁移到 CMake</font>](#font-colorgreen-size5-%E5%B0%86%E5%85%B6%E4%BB%96%E5%B9%B3%E5%8F%B0%E7%9A%84%E9%A1%B9%E7%9B%AE%E8%BF%81%E7%A7%BB%E5%88%B0-cmakefont)
+    <!-- - [<font color='red'> autotools </font>](#font-colorred-autotools-font)
+    - [<font color='red'> qmake </font>](#font-colorred-qmake-font)
+    - [<font color='red'> Visual Studio </font>](#font-colorred-visual-studio-font)
+    - [<font color='red'> CMakeLists.txt 自动推导 </font>](#font-colorred-cmakeliststxt-%E8%87%AA%E5%8A%A8%E6%8E%A8%E5%AF%BC-font)
+- [<font color='green' size=5> 相关链接 </font>](#font-colorgreen-size5-%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5-font)
+- [<font color='green' size=5> 类似工具 </font>](#font-colorgreen-size5-%E7%B1%BB%E4%BC%BC%E5%B7%A5%E5%85%B7-font)
+- [SCons：Eric S. Raymond、Timothee Besset、Zed A. Shaw 等大神力荐的项目架构工具。和 CMake 的最大区别是使用 Python 作为执行脚本。](#sconseric-s-raymondtimothee-bessetzed-a-shaw-%E7%AD%89%E5%A4%A7%E7%A5%9E%E5%8A%9B%E8%8D%90%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E5%B7%A5%E5%85%B7%E5%92%8C-cmake-%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BD%BF%E7%94%A8-python-%E4%BD%9C%E4%B8%BA%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC) -->
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+CMake-Demo
 =====
 
 [CMake 入门实战](https://hahack.com/codes/cmake) 的源代码。
@@ -88,7 +103,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-###  1. <a name='fontcolorredCMakeLists.txtfont'></a><font color='red'> 编写 CMakeLists.txt </font>
+### <font color='red'> 编写 CMakeLists.txt </font>
 
 
 首先编写 CMakeLists.txt 文件，并保存在与main.cc源文件同个目录下：
@@ -112,7 +127,7 @@ CMakeLists.txt 的语法比较简单，由命令、注释和空格组成，其�
 2. *_project_*：参数值是 *Demo1*，该命令表示项目的名称是 *Demo1* 。
 3. *_add_executable_*： 将名为 main.cc 的源文件编译成一个名称为 Demo 的可执行文件。
 
-###  2. <a name='fontcolorredfont'></a><font color='red'> 编译项目 </font>
+### <font color='red'> 编译项目 </font>
 
 之后，在当前目录执行 *cmake .* ，得到 Makefile 后再使用 *make* 命令编译得到 Demo1 可执行文件。
 
@@ -146,7 +161,7 @@ Linking C executable Demo
 
 # <font color='green' size=5> 多个源文件 </font>
 
-##  1. <a name='fontcolorChocolatesize3font'></a><font color='Chocolate' size=3> *同一目录，多个源文件* </font>
+## <font color='Chocolate' size=3> *同一目录，多个源文件* </font>
 
 >本节对应的源代码所在目录：Demo2。
 
@@ -198,7 +213,7 @@ add_executable(Demo ${DIR_SRCS})
 
 这样，CMake 会将当前目录所有源文件的文件名赋值给变量 *DIR_SRCS* ，再指示变量 *DIR_SRCS* 中的源文件需要编译成一个名称为 Demo 的可执行文件。
 
-##  2. <a name='fontcolorChocolatesize3font-1'></a><font color='Chocolate' size=3> *多个目录，多个源文件* </font>
+## <font color='Chocolate' size=3> *多个目录，多个源文件* </font>
 
 >本节对应的源代码所在目录：Demo3。
 
@@ -262,7 +277,7 @@ CMake 允许为项目增加编译选项，从而可以根据用户的环境和�
 
 例如，可以将 MathFunctions 库设为一个可选的库，如果该选项为 ON ，就使用该库定义的数学函数来进行运算。否则就调用标准库中的数学函数库。
 
-###  2.1. <a name='fontcolorredCMakeListsfont'></a><font color='red'> 修改 CMakeLists 文件 </font>
+### <font color='red'> 修改 CMakeLists 文件 </font>
 
 我们要做的第一步是在顶层的 CMakeLists.txt 文件中添加该选项：
 
@@ -305,7 +320,7 @@ target_link_libraries (Demo  ${EXTRA_LIBS})
 2. 第13行的 *option* 命令添加了一个 *USE_MYMATH* 选项，并且默认值为 *ON* 。
 3. 第17行根据 *USE_MYMATH* 变量的值来决定是否使用我们自己编写的 MathFunctions 库。
 
-###  2.2. <a name='fontcolorredmain.ccfont'></a><font color='red'> 修改 main.cc 文件 </font>
+### <font color='red'> 修改 main.cc 文件 </font>
 
 之后修改 main.cc 文件，让其根据 *USE_MYMATH* 的预定义值来决定是否调用标准库还是 MathFunctions 库：
 
@@ -342,7 +357,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-###  2.3. <a name='fontcolorredconfig.h.infont'></a><font color='red'> 编写 config.h.in 文件 </font>
+### <font color='red'> 编写 config.h.in 文件 </font>
 
 上面的程序值得注意的是第2行，这里引用了一个 config.h 文件，这个文件预定义了 USE_MYMATH 的值。但我们并不直接编写这个文件，为了方便从 CMakeLists.txt 中导入配置，我们编写一个 config.h.in 文件，内容如下：
 
@@ -352,7 +367,7 @@ int main(int argc, char *argv[])
 
 这样 CMake 会自动根据 CMakeLists 配置文件中的设置自动生成 config.h 文件。
 
-###  2.4. <a name='fontcolorredfont-1'></a><font color='red'> 编译项目 </font>
+### <font color='red'> 编译项目 </font>
 
 现在编译一下这个项目，为了便于交互式的选择该变量的值，可以使用 *ccmake* 命令（也可以使用 cmake -i 命令，该命令会提供一个会话式的交互式配置界面）：
 
@@ -404,7 +419,7 @@ Now we use the standard library.
 
 CMake 也可以指定安装规则，以及添加测试。这两个功能分别可以通过在产生 Makefile 后使用 *make install* 和 *make test* 来执行。在以前的 GNU Makefile 里，你可能需要为此编写 *install* 和 *test* 两个伪目标和相应的规则，但在 CMake 里，这样的工作同样只需要简单的调用几条命令。
 
-##  3. <a name='fontcolorChocolatesize3font-1'></a><font color='Chocolate' size=3> *定制安装规则* </font>
+## <font color='Chocolate' size=3> *定制安装规则* </font>
 
 首先先在 math/CMakeLists.txt 文件里添加下面两行：
 
@@ -441,7 +456,7 @@ Demo  libMathFunctions.a
 config.h  MathFunctions.h
 ```
 
-##  4. <a name='fontcolorChocolatesize3font-1'></a><font color='Chocolate' size=3> *为工程添加测试* </font>
+## <font color='Chocolate' size=3> *为工程添加测试* </font>
 
 添加测试同样很简单。CMake 提供了一个称为 CTest 的测试工具。我们要做的只是在项目根目录的 CMakeLists 文件中调用一系列的 *add_test* 命令。
 
@@ -534,7 +549,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 有时候可能要对系统环境做点检查，例如要使用一个平台相关的特性的时候。在这个例子中，我们检查系统是否自带 pow 函数。如果带有 pow 函数，就使用它；否则使用我们定义的 power 函数。
 
-###  4.1. <a name='fontcolorredCheckFunctionExistsfont'></a><font color='red'> 添加 CheckFunctionExists 宏 </font>
+### <font color='red'> 添加 CheckFunctionExists 宏 </font>
 
 首先在顶层 CMakeLists 文件中添加 CheckFunctionExists.cmake 宏，并调用 check_function_exists 命令测试链接器是否能够在链接阶段找到 pow 函数。
 
@@ -546,7 +561,7 @@ check_function_exists (pow HAVE_POW)
 
 将上面这段代码放在 configure_file 命令前。
 
-###  4.2. <a name='fontcolorredfont-1'></a><font color='red'> 预定义相关宏变量 </font>
+### <font color='red'> 预定义相关宏变量 </font>
 
 接下来修改 config.h.in 文件，预定义相关的宏变量。
 
@@ -555,7 +570,7 @@ check_function_exists (pow HAVE_POW)
 #cmakedefine HAVE_POW
 ```
 
-###  4.3. <a name='fontcolorredfont-1'></a><font color='red'> 在代码中使用宏和函数 </font>
+### <font color='red'> 在代码中使用宏和函数 </font>
 
 最后一步是修改 main.cc ，在代码中使用宏和函数：
 
@@ -747,7 +762,7 @@ Now we use our own Math library.
 
 CMake 可以很轻松地构建出在适合各个平台执行的工程环境。而如果当前的工程环境不是 CMake ，而是基于某个特定的平台，是否可以迁移到 CMake 呢？答案是可能的。下面针对几个常用的平台，列出了它们对应的迁移方案。
 
-###  4.4. <a name='fontcolorredautotoolsfont'></a><font color='red'> autotools </font>
+### <font color='red'> autotools </font>
 
 [am2cmake](https://projects.kde.org/projects/kde/kdesdk/kde-dev-scripts/repository/revisions/master/changes/cmake-utils/scripts/am2cmake) 可以将 autotools 系的项目转换到 CMake，这个工具的一个成功案例是 KDE 。
 
@@ -755,11 +770,11 @@ CMake 可以很轻松地构建出在适合各个平台执行的工程环境。�
 
 [Converting autoconf tests](http://www.cmake.org/Wiki/GccXmlAutoConfHints)
 
-###  4.5. <a name='fontcolorredqmakefont'></a><font color='red'> qmake </font>
+### <font color='red'> qmake </font>
 
 [qmake converter](http://www.cmake.org/Wiki/CMake:ConvertFromQmake) 可以转换使用 QT 的 qmake 的工程。
 
-###  4.6. <a name='fontcolorredVisualStudiofont'></a><font color='red'> Visual Studio </font>
+### <font color='red'> Visual Studio </font>
 
 [vcproj2cmake.rb](http://vcproj2cmake.sf.net/) 可以根据 Visual Studio 的工程文件（后缀名是 .vcproj 或 .vcxproj）生成 CMakeLists.txt 文件。
 
@@ -767,7 +782,7 @@ CMake 可以很轻松地构建出在适合各个平台执行的工程环境。�
 
 [folders4cmake](http://sourceforge.net/projects/folders4cmake/) 根据 Visual Studio 项目文件生成相应的 “source_group” 信息，这些信息可以很方便的在 CMake 脚本中使用。支持 Visual Studio 9/10 工程文件。
 
-###  4.7. <a name='fontcolorredCMakeLists.txtfont-1'></a><font color='red'> CMakeLists.txt 自动推导 </font>
+### <font color='red'> CMakeLists.txt 自动推导 </font>
 
 [gencmake](http://websvn.kde.org/trunk/KDE/kdesdk/cmake/scripts/) 根据现有文件推导 CMakeLists.txt 文件。
 
