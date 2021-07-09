@@ -7,7 +7,7 @@ project (Demo4)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # 是否使用自己的 MathFunctions 库
-option (USE_MYMATH
+option (USE_MYMATH_Demo4
 	   "Use provided math implementation" ON)
 
 # 加入一个配置头文件，用于处理 CMake 对源码的设置
@@ -17,11 +17,11 @@ configure_file (
   )
 
 # 是否加入 MathFunctions 库
-if (USE_MYMATH)
+if (USE_MYMATH_Demo4)
   include_directories ("${PROJECT_SOURCE_DIR}/math")
   add_subdirectory (math)
   set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions4)
-endif (USE_MYMATH)
+endif (USE_MYMATH_Demo4)
 
 # 查找当前目录下的所有源文件
 # 并将名称保存到 DIR_SRCS 变量

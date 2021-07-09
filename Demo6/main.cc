@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <config.h>
 
-#ifdef HAVE_POW
+#ifdef HAVE_POW_Demo6
   #include <math.h>
 #else
   #include <MathFunctions.h>
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     double base = atof(argv[1]);
     int exponent = atoi(argv[2]);
     
-#ifdef HAVE_POW
+#ifdef HAVE_POW_Demo6
     printf("Now we use the standard library. \n");
     double result = pow(base, exponent);
 #else

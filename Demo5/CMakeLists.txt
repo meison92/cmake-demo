@@ -13,15 +13,15 @@ configure_file (
   )
  
 # 是否使用自己的 MathFunctions 库
-option (USE_MYMATH
+option (USE_MYMATH_Demo5
 	   "Use provided math implementation" ON)
 
 # 是否加入 MathFunctions 库
-if (USE_MYMATH)
+if (USE_MYMATH_Demo5)
   include_directories ("${PROJECT_SOURCE_DIR}/math")
   add_subdirectory (math)
   set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions5)
-endif (USE_MYMATH)
+endif (USE_MYMATH_Demo5)
 
 # 查找当前目录下的所有源文件
 # 并将名称保存到 DIR_SRCS 变量

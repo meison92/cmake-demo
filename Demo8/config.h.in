@@ -3,4 +3,4 @@
 #define Demo_VERSION_MINOR @Demo_VERSION_MINOR@
 
 // does the platform provide pow function?
-#cmakedefine HAVE_POW
+#cmakedefine HAVE_POW_Demo8

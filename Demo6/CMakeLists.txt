@@ -32,7 +32,7 @@ add_executable(Demo6 ${DIR_SRCS})
 target_link_libraries (Demo6  ${EXTRA_LIBS})
 
 # 指定安装路径
-install (TARGETS Demo DESTINATION bin)
+install (TARGETS Demo6 DESTINATION bin)
 install (FILES "${PROJECT_BINARY_DIR}/config.h"
          DESTINATION include)
 
