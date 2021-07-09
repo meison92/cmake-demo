@@ -3,16 +3,16 @@
     - [<font color='red'> 编写 CMakeLists.txt </font>](#font-colorred-编写-cmakeliststxt-font)
     - [<font color='red'> 编译项目 </font>](#font-colorred-编译项目-font)
 - [<font color='green' size=5> 多个源文件 </font>](#font-colorgreen-size5-多个源文件-font)
-  - [<font color='Chocolate' size=3> *同一目录，多个源文件* </font>](#font-colorchocolate-size3-同一目录多个源文件-font)
-  - [<font color='Chocolate' size=3> *多个目录，多个源文件* </font>](#font-colorchocolate-size3-多个目录多个源文件-font)
+  - [<font color='Chocolate' size=3> **同一目录，多个源文件** </font>](#font-colorchocolate-size3-同一目录多个源文件-font)
+  - [<font color='Chocolate' size=3> **多个目录，多个源文件** </font>](#font-colorchocolate-size3-多个目录多个源文件-font)
 - [<font color='green' size=5> 自定义编译选项 </font>](#font-colorgreen-size5-自定义编译选项-font)
     - [<font color='red'> 修改 CMakeLists 文件 </font>](#font-colorred-修改-cmakelists-文件-font)
     - [<font color='red'> 修改 main.cc 文件 </font>](#font-colorred-修改-maincc-文件-font)
     - [<font color='red'> 编写 config.h.in 文件 </font>](#font-colorred-编写-confighin-文件-font)
     - [<font color='red'> 编译项目 </font>](#font-colorred-编译项目-font-1)
 - [<font color='green' size=5> 安装和测试 </font>](#font-colorgreen-size5-安装和测试-font)
-  - [<font color='Chocolate' size=3> *定制安装规则* </font>](#font-colorchocolate-size3-定制安装规则-font)
-  - [<font color='Chocolate' size=3> *为工程添加测试* </font>](#font-colorchocolate-size3-为工程添加测试-font)
+  - [<font color='Chocolate' size=3> **定制安装规则** </font>](#font-colorchocolate-size3-定制安装规则-font)
+  - [<font color='Chocolate' size=3> **为工程添加测试** </font>](#font-colorchocolate-size3-为工程添加测试-font)
 - [<font color='green' size=5> 支持 gdb </font>](#font-colorgreen-size5-支持-gdb-font)
 - [<font color='green' size=5> 添加环境检查 </font>](#font-colorgreen-size5-添加环境检查-font)
     - [<font color='red'> 添加 CheckFunctionExists 宏 </font>](#font-colorred-添加-checkfunctionexists-宏-font)
@@ -42,8 +42,8 @@ CMake 就是针对上面问题所设计的工具：它首先允许开发者编�
 在 linux 平台下使用 CMake 生成 Makefile 并编译的流程如下：
 
 1. 编写 CMake 配置文件 CMakeLists.txt 。
-2. 执行命令 *cmake PATH* 或者 *ccmake PATH* 生成 Makefile（*ccmake* 和 *cmake* 的区别在于前者提供了一个交互式的界面）。其中， *PATH* 是 CMakeLists.txt 所在的目录。
-3. 使用 *make* 命令进行编译。
+2. 执行命令 **cmake PATH** 或者 **ccmake PATH** 生成 Makefile（**ccmake** 和 **cmake** 的区别在于前者提供了一个交互式的界面）。其中， **PATH** 是 CMakeLists.txt 所在的目录。
+3. 使用 **make** 命令进行编译。
 本文将从实例入手，一步步讲解 CMake 的常见用法，文中所有的实例代码可以在这里找到。如果你读完仍觉得意犹未尽，可以继续学习我在文章末尾提供的其他资源。
 
 # <font color='green' size=5> 入门案例：单个源文件 </font>
@@ -113,13 +113,13 @@ CMakeLists.txt 的语法比较简单，由命令、注释和空格组成，其�
 
 对于上面的 CMakeLists.txt 文件，依次出现了几个命令：
 
-1. *_cmake_minimum_required_*：指定运行此配置文件所需的 CMake 的最低版本；
-2. *_project_*：参数值是 *Demo1*，该命令表示项目的名称是 *Demo1* 。
-3. *_add_executable_*： 将名为 main.cc 的源文件编译成一个名称为 Demo 的可执行文件。
+1. **_cmake_minimum_required_**：指定运行此配置文件所需的 CMake 的最低版本；
+2. **_project_**：参数值是 **Demo1**，该命令表示项目的名称是 **Demo1** 。
+3. **_add_executable_**： 将名为 main.cc 的源文件编译成一个名称为 Demo 的可执行文件。
 
 ### <font color='red'> 编译项目 </font>
 
-之后，在当前目录执行 *cmake .* ，得到 Makefile 后再使用 *make* 命令编译得到 Demo1 可执行文件。
+之后，在当前目录执行 **cmake .** ，得到 Makefile 后再使用 **make** 命令编译得到 Demo1 可执行文件。
 
 ```ini
 [ehome@xman Demo1]$ cmake .
@@ -151,11 +151,11 @@ Linking C executable Demo
 
 # <font color='green' size=5> 多个源文件 </font>
 
-## <font color='Chocolate' size=3> *同一目录，多个源文件* </font>
+## <font color='Chocolate' size=3> **同一目录，多个源文件** </font>
 
 >本节对应的源代码所在目录：Demo2。
 
-上面的例子只有单个源文件。现在假如把 *power* 函数单独写进一个名为 *MathFunctions.c* 的源文件里，使得这个工程变成如下的形式：
+上面的例子只有单个源文件。现在假如把 **power** 函数单独写进一个名为 **MathFunctions.c** 的源文件里，使得这个工程变成如下的形式：
 
     ./Demo2
         |
@@ -178,7 +178,7 @@ project (Demo2)
 add_executable(Demo main.cc MathFunctions.cc)
 ```
 
-唯一的改动只是在 *add_executable* 命令中增加了一个 *MathFunctions.cc* 源文件。这样写当然没什么问题，但是如果源文件很多，把所有源文件的名字都加进去将是一件烦人的工作。更省事的方法是使用 *aux_source_directory* 命令，该命令会查找指定目录下的所有源文件，然后将结果存进指定变量名。其语法如下：
+唯一的改动只是在 **add_executable** 命令中增加了一个 **MathFunctions.cc** 源文件。这样写当然没什么问题，但是如果源文件很多，把所有源文件的名字都加进去将是一件烦人的工作。更省事的方法是使用 **aux_source_directory** 命令，该命令会查找指定目录下的所有源文件，然后将结果存进指定变量名。其语法如下：
 
 ```cmake
 aux_source_directory(<dir> <variable>)
@@ -201,13 +201,13 @@ aux_source_directory(. DIR_SRCS)
 add_executable(Demo ${DIR_SRCS})
 ```
 
-这样，CMake 会将当前目录所有源文件的文件名赋值给变量 *DIR_SRCS* ，再指示变量 *DIR_SRCS* 中的源文件需要编译成一个名称为 Demo 的可执行文件。
+这样，CMake 会将当前目录所有源文件的文件名赋值给变量 **DIR_SRCS** ，再指示变量 **DIR_SRCS** 中的源文件需要编译成一个名称为 Demo 的可执行文件。
 
-## <font color='Chocolate' size=3> *多个目录，多个源文件* </font>
+## <font color='Chocolate' size=3> **多个目录，多个源文件** </font>
 
 >本节对应的源代码所在目录：Demo3。
 
-现在进一步将 *MathFunctions.h* 和 *MathFunctions.cc* 文件移动到 math 目录下。
+现在进一步将 **MathFunctions.h** 和 **MathFunctions.cc** 文件移动到 math 目录下。
 
     ./Demo3
         |
@@ -244,7 +244,7 @@ add_executable(Demo main.cc)
 target_link_libraries(Demo MathFunctions)
 ```
 
-该文件添加了下面的内容: 第3行，使用命令 *add_subdirectory* 指明本项目包含一个子目录 math，这样 math 目录下的 CMakeLists.txt 文件和源代码也会被处理 。第6行，使用命令 *target_link_libraries* 指明可执行文件 main 需要连接一个名为 MathFunctions 的链接库 。
+该文件添加了下面的内容: 第3行，使用命令 **add_subdirectory** 指明本项目包含一个子目录 math，这样 math 目录下的 CMakeLists.txt 文件和源代码也会被处理 。第6行，使用命令 **target_link_libraries** 指明可执行文件 main 需要连接一个名为 MathFunctions 的链接库 。
 
 子目录中的 CMakeLists.txt：
 
@@ -257,7 +257,7 @@ aux_source_directory(. DIR_LIB_SRCS)
 add_library (MathFunctions ${DIR_LIB_SRCS})
 ```
 
-在该文件中使用命令 *add_library* 将 src 目录中的源文件编译为静态链接库。
+在该文件中使用命令 **add_library** 将 src 目录中的源文件编译为静态链接库。
 
 # <font color='green' size=5> 自定义编译选项 </font>
 
@@ -306,13 +306,13 @@ target_link_libraries (Demo  ${EXTRA_LIBS})
 
 其中：
 
-1. 第7行的 *configure_file* 命令用于加入一个配置头文件 config.h ，这个文件由 CMake 从 config.h.in 生成，通过这样的机制，将可以通过预定义一些参数和变量来控制代码的生成。
-2. 第13行的 *option* 命令添加了一个 *USE_MYMATH* 选项，并且默认值为 *ON* 。
-3. 第17行根据 *USE_MYMATH* 变量的值来决定是否使用我们自己编写的 MathFunctions 库。
+1. 第7行的 **configure_file** 命令用于加入一个配置头文件 config.h ，这个文件由 CMake 从 config.h.in 生成，通过这样的机制，将可以通过预定义一些参数和变量来控制代码的生成。
+2. 第13行的 **option** 命令添加了一个 **USE_MYMATH** 选项，并且默认值为 **ON** 。
+3. 第17行根据 **USE_MYMATH** 变量的值来决定是否使用我们自己编写的 MathFunctions 库。
 
 ### <font color='red'> 修改 main.cc 文件 </font>
 
-之后修改 main.cc 文件，让其根据 *USE_MYMATH* 的预定义值来决定是否调用标准库还是 MathFunctions 库：
+之后修改 main.cc 文件，让其根据 **USE_MYMATH** 的预定义值来决定是否调用标准库还是 MathFunctions 库：
 
 ```cpp
 #include <stdio.h>
@@ -359,13 +359,13 @@ int main(int argc, char *argv[])
 
 ### <font color='red'> 编译项目 </font>
 
-现在编译一下这个项目，为了便于交互式的选择该变量的值，可以使用 *ccmake* 命令（也可以使用 cmake -i 命令，该命令会提供一个会话式的交互式配置界面）：
+现在编译一下这个项目，为了便于交互式的选择该变量的值，可以使用 **ccmake** 命令（也可以使用 cmake -i 命令，该命令会提供一个会话式的交互式配置界面）：
 
 ![ccmake](./resource/ccmake.png)
 
-从中可以找到刚刚定义的 *USE_MYMATH* 选项，按键盘的方向键可以在不同的选项窗口间跳转，按下 *enter* 键可以修改该选项。修改完成后可以按下 *c* 选项完成配置，之后再按 *g* 键确认生成 Makefile 。ccmake 的其他操作可以参考窗口下方给出的指令提示。
+从中可以找到刚刚定义的 **USE_MYMATH** 选项，按键盘的方向键可以在不同的选项窗口间跳转，按下 **enter** 键可以修改该选项。修改完成后可以按下 **c** 选项完成配置，之后再按 **g** 键确认生成 Makefile 。ccmake 的其他操作可以参考窗口下方给出的指令提示。
 
-我们可以试试分别将 *USE_MYMATH* 设为 *ON* 和 *OFF* 得到的结果：
+我们可以试试分别将 **USE_MYMATH** 设为 **ON** 和 **OFF** 得到的结果：
 
 <font color='DeepSkyBlue '> USE_MYMATH 为 ON </font>
 
@@ -407,9 +407,9 @@ Now we use the standard library.
 
 >本节对应的源代码所在目录：Demo5。
 
-CMake 也可以指定安装规则，以及添加测试。这两个功能分别可以通过在产生 Makefile 后使用 *make install* 和 *make test* 来执行。在以前的 GNU Makefile 里，你可能需要为此编写 *install* 和 *test* 两个伪目标和相应的规则，但在 CMake 里，这样的工作同样只需要简单的调用几条命令。
+CMake 也可以指定安装规则，以及添加测试。这两个功能分别可以通过在产生 Makefile 后使用 **make install** 和 **make test** 来执行。在以前的 GNU Makefile 里，你可能需要为此编写 **install** 和 **test** 两个伪目标和相应的规则，但在 CMake 里，这样的工作同样只需要简单的调用几条命令。
 
-## <font color='Chocolate' size=3> *定制安装规则* </font>
+## <font color='Chocolate' size=3> **定制安装规则** </font>
 
 首先先在 math/CMakeLists.txt 文件里添加下面两行：
 
@@ -428,7 +428,7 @@ install (FILES "${PROJECT_BINARY_DIR}/config.h"
             DESTINATION include)
 ```
 
-通过上面的定制，生成的 Demo 文件和 MathFunctions 函数库 libMathFunctions.o 文件将会被复制到 */usr/local/bin* 中，而 MathFunctions.h 和生成的 config.h 文件则会被复制到 */usr/local/include* 中。我们可以验证一下（顺带一提的是，这里的 */usr/local/* 是默认安装到的根目录，可以通过修改 *CMAKE_INSTALL_PREFIX* 变量的值来指定这些文件应该拷贝到哪个根目录）：
+通过上面的定制，生成的 Demo 文件和 MathFunctions 函数库 libMathFunctions.o 文件将会被复制到 **/usr/local/bin** 中，而 MathFunctions.h 和生成的 config.h 文件则会被复制到 **/usr/local/include** 中。我们可以验证一下（顺带一提的是，这里的 **/usr/local/** 是默认安装到的根目录，可以通过修改 **CMAKE_INSTALL_PREFIX** 变量的值来指定这些文件应该拷贝到哪个根目录）：
 
 ```ini
 [ehome@xman Demo5]$ sudo make install
@@ -446,9 +446,9 @@ Demo  libMathFunctions.a
 config.h  MathFunctions.h
 ```
 
-## <font color='Chocolate' size=3> *为工程添加测试* </font>
+## <font color='Chocolate' size=3> **为工程添加测试** </font>
 
-添加测试同样很简单。CMake 提供了一个称为 CTest 的测试工具。我们要做的只是在项目根目录的 CMakeLists 文件中调用一系列的 *add_test* 命令。
+添加测试同样很简单。CMake 提供了一个称为 CTest 的测试工具。我们要做的只是在项目根目录的 CMakeLists 文件中调用一系列的 **add_test** 命令。
 
 ```cmake
 # 启用测试
@@ -460,7 +460,7 @@ add_test (test_run Demo 5 2)
 # 测试帮助信息是否可以正常提示
 add_test (test_usage Demo)
 set_tests_properties (test_usage
-    PROPERTIES PASS_REGULAR_EXPRESSION "Usage: .* base exponent")
+    PROPERTIES PASS_REGULAR_EXPRESSION "Usage: .** base exponent")
 
 # 测试 5 的平方
 add_test (test_5_2 Demo 5 2)
@@ -481,7 +481,7 @@ set_tests_properties (test_2_10
 PROPERTIES PASS_REGULAR_EXPRESSION "is 1024")
 ```
 
-上面的代码包含了四个测试。第一个测试 *test_run* 用来测试程序是否成功运行并返回 0 值。剩下的三个测试分别用来测试 5 的 平方、10 的 5 次方、2 的 10 次方是否都能得到正确的结果。其中 *PASS_REGULAR_EXPRESSION* 用来测试输出是否包含后面跟着的字符串。
+上面的代码包含了四个测试。第一个测试 **test_run** 用来测试程序是否成功运行并返回 0 值。剩下的三个测试分别用来测试 5 的 平方、10 的 5 次方、2 的 10 次方是否都能得到正确的结果。其中 **PASS_REGULAR_EXPRESSION** 用来测试输出是否包含后面跟着的字符串。
 
 让我们看看测试的结果：
 
@@ -519,11 +519,11 @@ do_test (10 5 "is 100000")
 do_test (2 10 "is 1024")
 ```
 
-关于 CTest 的更详细的用法可以通过 *man 1 ctest* 参考 CTest 的文档。
+关于 CTest 的更详细的用法可以通过 **man 1 ctest** 参考 CTest 的文档。
 
 # <font color='green' size=5> 支持 gdb </font>
 
-让 CMake 支持 gdb 的设置也很容易，只需要指定 *Debug* 模式下开启 -g 选项：
+让 CMake 支持 gdb 的设置也很容易，只需要指定 **Debug** 模式下开启 -g 选项：
 
 ```cmake
 set(CMAKE_BUILD_TYPE "Debug")
@@ -579,7 +579,7 @@ check_function_exists (pow HAVE_POW)
 >本节对应的源代码所在目录：Demo7。
 给项目添加和维护版本号是一个好习惯，这样有利于用户了解每个版本的维护情况，并及时了解当前所用的版本是否过时，或是否可能出现不兼容的情况。
 
-首先修改顶层 CMakeLists 文件，在 *project* 命令之后加入如下两行：
+首先修改顶层 CMakeLists 文件，在 **project** 命令之后加入如下两行：
 
 ```
 set (Demo_VERSION_MAJOR 1)
@@ -653,7 +653,7 @@ include (CPack)
 1. 导入 InstallRequiredSystemLibraries 模块，以便之后导入 CPack 模块；
 2. 设置一些 CPack 相关变量，包括版权信息和版本信息，其中版本信息用了上一节定义的版本号；
 3. 导入 CPack 模块。
-接下来的工作是像往常一样构建工程，并执行 *cpack* 命令。
+接下来的工作是像往常一样构建工程，并执行 **cpack** 命令。
 
 * 生成二进制安装包：
 
@@ -663,7 +663,7 @@ include (CPack)
 
    <pre><code> pack -C CPackSourceConfig.cmake </code></pre>
 
-我们可以试一下。在生成项目后，执行 *cpack -C CPackConfig.cmake* 命令：
+我们可以试一下。在生成项目后，执行 **cpack -C CPackConfig.cmake** 命令：
 
 ```ini
 [ehome@xman Demo8]$ cpack -C CPackSourceConfig.cmake
@@ -746,7 +746,7 @@ Now we use our own Math library.
     5 ^ 2 is 25
 ```
 
-关于 CPack 的更详细的用法可以通过 *man 1 cpack* 参考 CPack 的文档。
+关于 CPack 的更详细的用法可以通过 **man 1 cpack** 参考 CPack 的文档。
 
 # <font color='green' size=5> 将其他平台的项目迁移到 CMake</font>
 
