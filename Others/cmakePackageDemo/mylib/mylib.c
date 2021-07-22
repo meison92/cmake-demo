@@ -2,6 +2,6 @@
 #include"mylib.h"
 void hello()
 {
-      printf("hello");
+      printf("hello\n");
 }
 
