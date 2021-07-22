@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/myapp.dir/myapp.c.o  -o myapp /home/rootroot/newworkspace/mylib/install/lib/libmylib.a 

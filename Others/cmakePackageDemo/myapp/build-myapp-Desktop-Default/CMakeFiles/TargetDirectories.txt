@@ -1,0 +1,3 @@
+/home/rootroot/newworkspace/myapp/build-myapp-Desktop-Default/CMakeFiles/rebuild_cache.dir
+/home/rootroot/newworkspace/myapp/build-myapp-Desktop-Default/CMakeFiles/edit_cache.dir
+/home/rootroot/newworkspace/myapp/build-myapp-Desktop-Default/CMakeFiles/myapp.dir
