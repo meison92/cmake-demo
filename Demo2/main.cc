@@ -4,6 +4,7 @@
 
 int main(int argc, char *argv[])
 {
+    printf("argc is: %d", argc);
     if (argc < 3){
         printf("Usage: %s base exponent \n", argv[0]);
         return 1;
